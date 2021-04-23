@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+    div {
+        background-image: url("https://images.unsplash.com/photo-1536514498073-50e69d39c6cf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60");
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin: auto;
+        text-align: center;
+        font-size: 30px;
+        color: black;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        background-color: transparent;
+        padding: 100px;
+    }
+    
+    ul {
+        font-size: 20px;
+        color: black;
+        text-align: left;
+    }
+    
+    h4 {
+        text-align: left;
+        font-size: 25px;
+        color: black;
+    }
+    
+    button {
+        font-size: 20px;
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Total Bill</title>
+</head>
+
+<body>
+    <form action="LastPage.html" onsubmit="FinalSubmit()">
+        <div>
+            <h2>Your Total Fare</h2>
+
+            <br><br> Your Cab Type : <span id="car"></span>
+            <br><br> Date : <span id="presentDate"></span>
+            <br><br> Time : <span id="presentTime"></span>
+            <br><br> Your Fare without Gst : <span id="nogst"></span>
+            <br><br> Your Fare with Gst : <span id="Withgst"></span>
+            <br><br> Price for Senior citizen : <span id="senior"></span><br>
+            <button type="submit">Book Now</button>
+
+            <h4>Notice</h4>
+            <ul>
+                <li>The price may vary during peak hours</li>
+                <li>Keep your belongings safe</li>
+                <li>Maintain social distance</li>
+                <li>Wear masks properly</li>
+            </ul>
+        </div>
+
+
+
+        <script>
+            document.getElementById("car").innerHTML = localStorage.getItem("stringValue");
+            document.getElementById("nogst").innerHTML = localStorage.getItem("firstStringValue");
+            document.getElementById("presentDate").innerHTML = localStorage.getItem("todayDate");
+            document.getElementById("presentTime").innerHTML = localStorage.getItem("todayTime");
+
+            //Checks if the user is above 60 years
+            if (localStorage.getItem("presentAge") >= 60) {
+                document.getElementById("senior").innerHTML = localStorage.getItem("discountAmount");
+                document.getElementById("Withgst").innerHTML = "NIL";
+
+            } else {
+                document.getElementById("Withgst").innerHTML = localStorage.getItem("secondStringValue");
+                document.getElementById("senior").innerHTML = "NIL";
+            }
+
+            function FinalSubmit() {
+                alert("Your cab has been booked");
+
+            }
+        </script>
+
+        <br><br>
+
+    </form>
+</body>
+
+</html>

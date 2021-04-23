@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>HOLA - Booking</title>
+    <style>
+        body {
+            background-image: url("https://images.unsplash.com/photo-1536514498073-50e69d39c6cf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60");
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin: auto;
+            text-align: center;
+            font-size: 30px;
+            color: black;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: 300px;
+            margin-right: 300px;
+            background-color: transparent;
+            padding: 100px;
+        }
+        
+        select {
+            font-size: 30px;
+        }
+        
+        input {
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form action="TotalFare.html" method="Get" onsubmit="totalFare()">
+        <h1>Required Details</h1>
+
+        <label for="carmodel">Choose your Car Type:</label>
+        <select id="cartype" name="cars">
+            <option value="micro">Micro</option>
+            <option value="mini"  >Mini</option>    
+            <option value="prime" >Prime</option>   
+        </select>
+
+        <br>
+        <br>
+
+        <label for="name">Enter total distance</label>
+        <input type="number" id="totalDistance" name="totalDisatnce" placeholder="Enter total kms" required>
+        <br>
+        <br>
+
+        <h4>Booking Time and Date</h4>
+        <label for="date">Enter Journey date</label>
+        <input type="date" id="date" name="date" min="5" required>
+        <br>
+        <br>
+
+        <label for="time">Enter journey time</label>
+        <input type="time" id="time" name="time" required>
+        <br>
+        <br>
+
+        <label for="dob">Enter Birth date</label>
+        <input type="date" id="dob" name="dob" required><br>
+        <br>
+        <br>
+
+        <label for="gst">GST: (in %)</label>
+        <input type="number" id="gst" name="gst" value="7" readonly><br>
+        <br>
+        <input type="submit" value="Submit">
+
+
+    </form>
+    <script>
+        function totalFare() {
+
+            let date = document.querySelector("#date").value;
+            localStorage.setItem("todayDate", date) //Stores date in web browser 
+
+            let time = document.querySelector("#time").value;
+            localStorage.setItem("todayTime", time);
+
+            let getDate = new Date();
+            let presentYear = getDate.getFullYear(); //Present Year
+
+
+            let birthYear = "";
+            birthYear = document.querySelector("#dob").value;
+            let newBirthYear = birthYear.substring(0, 4);
+            let age = presentYear - newBirthYear; // Present Age of User
+            localStorage.setItem("presentAge", age);
+
+            //checks if the age of the user is above 60 years.
+            if (age >= 60) {
+                let xPercentOfTotalAmount = (localStorage.getItem("secondStringValue") * 50) / 100.0;
+                let discount = (localStorage.getItem("secondStringValue") - xPercentOfTotalAmount);
+                localStorage.setItem("discountAmount", discount);
+            }
+
+            let carTypes = document.querySelector("#cartype").value;
+            alert("Car Type: " + carTypes); //Displays car type
+
+            let kiloMeters = document.querySelector("#totalDistance").value;
+            alert("Total Distance: " + kiloMeters); //displays total distance
+
+            localStorage.setItem("stringValue", carTypes); //Stores the car type in the web browser
+
+            // Calculates the price for micro cab
+            if (carTypes == "micro") {
+                let finalPriceWithoutGst = kiloMeters * 10; /// price without gst
+                localStorage.setItem("firstStringValue", finalPriceWithoutGst);
+                let gst = (finalPriceWithoutGst * 7) / 100.0;
+                let finalPriceWithGst = finalPriceWithoutGst + gst; // price with gst
+                localStorage.setItem("secondStringValue", finalPriceWithGst);
+            }
+
+            // Calculates the price for mini cab
+            else if (carTypes == "mini") {
+                let finalPriceWithoutGst = kiloMeters * 15;
+                localStorage.setItem("firstStringValue", finalPriceWithoutGst);
+                let gst = (finalPriceWithoutGst * 7) / 100.0;
+                let finalPriceWithGst = finalPriceWithoutGst + gst;
+                localStorage.setItem("secondStringValue", finalPriceWithGst);
+            }
+
+            // Calculates the price for prime cab
+            else {
+                let finalPriceWithoutGst = kiloMeters * 20;
+                localStorage.setItem("firstStringValue", finalPriceWithoutGst);
+                let gst = (finalPriceWithoutGst * 7) / 100.0;
+                let finalPriceWithGst = finalPriceWithoutGst + gst;
+                localStorage.setItem("secondStringValue", finalPriceWithGst);
+            }
+        }
+    </script>
+</body>
+
+</html>

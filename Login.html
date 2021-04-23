@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Hola - Log in </title>
+
+    <style>
+        body {
+            background-image: url("https://images.unsplash.com/photo-1536514498073-50e69d39c6cf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60");
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin: auto;
+            text-align: center;
+            font-size: 50px;
+            color: black;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: 300px;
+            margin-right: 300px;
+            background-color: transparent;
+            padding: 100px;
+        }
+        
+        input {
+            font-size: 30px;
+        }
+        
+        button {
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form onsubmit="login()">
+        <h1>hola</h1>
+        <h4>#holaforweb</h4>
+        <p>Takes you to your destination ASAP!!</p>
+
+        <label for="name">Username : </label>
+        <input type="text" placeholder="Type your name" name="username" id="username" required autofocus><br>
+        <br>
+
+        <label for="pass">Password : </label>
+
+        <input type="password" placeholder="Enter your password" name="password" id="password" required><br>
+        <br>
+
+        <button type="submit">Submit</button>
+        <button type="reset" onclick="reload()">Reset</button>
+
+        <p style="font-size:20px">username : user<br> password: 1234</p>
+
+
+    </form>
+    <script>
+        function login() {
+            event.preventDefault() //prevents default behaviour
+
+            let username = document.querySelector("#username").value;
+            let password = document.querySelector("#password").value;
+
+            // Checks if username and password matches
+            if (username == "user" && password == 1234) {
+                alert("Login success")
+                window.location.href = "CabPriceDetails.html"; //Redirects to next page
+
+            } else {
+                alert("Invalid credentials");
+            }
+        }
+        //Reloads the page
+        function reload() {
+            location.reload();
+        }
+    </script>
+
+</body>
+
+</html>
